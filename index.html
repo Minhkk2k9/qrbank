@@ -2,180 +2,123 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Tạo mã QR bank</title>
-  <!-- Windows 95 UI Kit -->
-  <link rel="stylesheet" href="https://unpkg.com/98.css">
+  <title>Tạo mã QR ngân hàng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Pixel Lite UI Kit CSS -->
+  <link rel="stylesheet" href="https://demo.themesberg.com/pixel-lite/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://demo.themesberg.com/pixel-lite/css/pixel.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <style>
     body {
-      font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
-      background: #c0c0c0;
-      padding: 20px;
+      background-color: #f8f9fa;
     }
-
-    .container {
-      max-width: 500px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border: 2px solid #000;
-      box-shadow: inset -1px -1px #fff, inset 1px 1px #808080;
+    .modal-backdrop {
+      z-index: 1040 !important;
     }
-
-    h2 {
-      text-align: center;
-    }
-
-    label {
-      font-weight: bold;
-      margin-top: 10px;
-      display: block;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      border: 2px solid #000;
-      background: #fff;
-      font-family: inherit;
-    }
-
-    button {
-      margin-top: 15px;
-      padding: 10px;
-      width: 100%;
-      background-color: #c0c0c0;
-      border: 2px solid #000;
-      box-shadow: inset -1px -1px #fff, inset 1px 1px #808080;
-      font-family: inherit;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #a0a0a0;
-    }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 10;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background: rgba(0,0,0,0.6);
-      font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
-    }
-
     .modal-content {
-      background-color: #fff;
-      margin: 10% auto;
-      padding: 20px;
-      border: 2px solid #000;
-      box-shadow: inset -1px -1px #fff, inset 1px 1px #808080;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    .modal-content img {
-      max-width: 100%;
-      margin-bottom: 15px;
-    }
-
-    .close {
-      color: #000;
-      float: right;
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
+      z-index: 1100 !important;
     }
   </style>
 </head>
 <body>
-  <div class="container window">
-    <div class="title-bar">
-      <div class="title-bar-text">Tạo mã QR bank</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close" onclick="window.close();"></button>
+  <!-- Header -->
+  <header class="header-global">
+    <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom">
+      <div class="container">
+        <a class="navbar-brand font-weight-bold" href="#">Tạo mã QR ngân hàng</a>
       </div>
-    </div>
-    <div class="window-body">
-      <form id="qrForm">
-        <label>Ngân hàng *</label>
-        <select id="bankCode" required>
-          <option value="">Chọn ngân hàng</option>
-          <option value="VCB">Vietcombank</option>
-          <option value="TCB">Techcombank</option>
-          <option value="MB">MB Bank</option>
-          <option value="ACB">ACB</option>
-          <option value="BIDV">BIDV</option>
-          <option value="VIB">VIB</option>
-          <option value="VPB">VPBank</option>
-          <option value="STB">Sacombank</option>
-          <option value="HDB">HDBank</option>
-          <option value="SHB">SHB</option>
-          <option value="TPB">TPBank</option>
-          <option value="EIB">Eximbank</option>
-          <option value="OCB">OCB</option>
-          <option value="SCB">SCB</option>
-          <option value="ABB">ABBank</option>
-          <option value="PGB">PG Bank</option>
-          <option value="MSB">MSB</option>
-          <option value="LPB">LienVietPostBank</option>
-          <option value="KLB">Kienlongbank</option>
-          <option value="SEA">SeaBank</option>
-          <option value="NAB">Nam A Bank</option>
-          <option value="BVB">Bao Viet Bank</option>
-          <option value="IVB">Indovina Bank</option>
-          <option value="UOB">UOB Vietnam</option>
-          <option value="CIMB">CIMB Vietnam</option>
-          <option value="VRB">Vietnam-Russia Bank</option>
-          <option value="HSBC">HSBC</option>
-          <option value="CITIBANK">Citibank</option>
-          <option value="WVB">Woori Bank</option>
-          <option value="SHINHAN">Shinhan Bank</option>
-        </select>
+    </nav>
+  </header>
 
-        <label>Số tài khoản *</label>
-        <input type="text" id="accountNumber" required placeholder="VD: 123456789">
-
-        <label>Tên tài khoản *</label>
-        <input type="text" id="accountName" required placeholder="VD: Nguyen Van A">
-
-        <label>Số tiền (tùy chọn)</label>
-        <input type="number" id="amount" placeholder="VD: 100000">
-
-        <label>Nội dung chuyển khoản</label>
-        <textarea id="note" placeholder="VD: Thanh toan hoa don"></textarea>
-
-        <button type="submit">Tạo Mã QR</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal QR -->
-  <div id="qrModal" class="modal">
-    <div class="modal-content window">
-      <div class="title-bar">
-        <div class="title-bar-text">Mã QR chuyển tiền</div>
-        <div class="title-bar-controls">
-          <button aria-label="Close" onclick="document.getElementById('qrModal').style.display='none'"></button>
+  <!-- Main Content -->
+  <main class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-body">
+            <form id="qrForm">
+              <div class="form-group">
+                <label for="bankCode">Ngân hàng *</label>
+                <select id="bankCode" class="form-control" required>
+                  <option value="">Chọn ngân hàng</option>
+                  <option value="VCB">Vietcombank</option>
+                  <option value="TCB">Techcombank</option>
+                  <option value="MB">MB Bank</option>
+                  <option value="ACB">ACB</option>
+                  <option value="BIDV">BIDV</option>
+                  <option value="VIB">VIB</option>
+                  <option value="VPB">VPBank</option>
+                  <option value="STB">Sacombank</option>
+                  <option value="HDB">HDBank</option>
+                  <option value="SHB">SHB</option>
+                  <option value="TPB">TPBank</option>
+                  <option value="EIB">Eximbank</option>
+                  <option value="OCB">OCB</option>
+                  <option value="SCB">SCB</option>
+                  <option value="ABB">ABBank</option>
+                  <option value="PGB">PG Bank</option>
+                  <option value="MSB">MSB</option>
+                  <option value="LPB">LienVietPostBank</option>
+                  <option value="KLB">Kienlongbank</option>
+                  <option value="SEA">SeaBank</option>
+                  <option value="NAB">Nam A Bank</option>
+                  <option value="BVB">Bao Viet Bank</option>
+                  <option value="IVB">Indovina Bank</option>
+                  <option value="UOB">UOB Vietnam</option>
+                  <option value="CIMB">CIMB Vietnam</option>
+                  <option value="VRB">Vietnam-Russia Bank</option>
+                  <option value="HSBC">HSBC</option>
+                  <option value="CITIBANK">Citibank</option>
+                  <option value="WVB">Woori Bank</option>
+                  <option value="SHINHAN">Shinhan Bank</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="accountNumber">Số tài khoản *</label>
+                <input type="text" id="accountNumber" class="form-control" required placeholder="VD: 123456789">
+              </div>
+              <div class="form-group">
+                <label for="accountName">Tên tài khoản *</label>
+                <input type="text" id="accountName" class="form-control" required placeholder="VD: Nguyen Van A">
+              </div>
+              <div class="form-group">
+                <label for="amount">Số tiền (tùy chọn)</label>
+                <input type="number" id="amount" class="form-control" placeholder="VD: 100000">
+              </div>
+              <div class="form-group">
+                <label for="note">Nội dung chuyển khoản</label>
+                <textarea id="note" class="form-control" placeholder="VD: Thanh toan hoa don"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Tạo Mã QR</button>
+            </form>
+          </div>
         </div>
       </div>
-      <div class="window-body">
-        <img id="qrImage" src="" alt="QR VietQR">
-        <a id="downloadLink" href="#" download="vietqr.png">
-          <button style="margin-top:10px;">Lưu mã QR về máy</button>
-        </a>
+    </div>
+  </main>
+
+  <!-- Modal QR -->
+  <div class="modal fade" id="qrModal" tabindex="-1" role="dialog" aria-labelledby="qrModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Mã QR Chuyển Tiền</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="qrImage" src="" alt="QR VietQR" class="img-fluid mb-3">
+          <a id="downloadLink" href="#" download="vietqr.png" class="btn btn-success">Lưu mã QR về máy</a>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Scripts -->
+  <script src="https://demo.themesberg.com/pixel-lite/vendor/jquery/jquery.min.js"></script>
+  <script src="https://demo.themesberg.com/pixel-lite/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script>
     document.getElementById("qrForm").addEventListener("submit", function(e) {
       e.preventDefault();
@@ -200,16 +143,8 @@
       document.getElementById("qrImage").src = qrURL;
       document.getElementById("downloadLink").href = qrURL;
 
-      document.getElementById("qrModal").style.display = "block";
+      $('#qrModal').modal('show');
     });
-
-    // Đóng modal nếu click ra ngoài
-    window.onclick = function(event) {
-      const modal = document.getElementById('qrModal');
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    };
   </script>
 </body>
 </html>
